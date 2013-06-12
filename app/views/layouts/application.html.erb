@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SocialThing</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+	<% if logged_in? %>
+	<%= button_to "Log Out", session_url, :method => :delete %>
+	<% else %>
+	<a href="<%= new_user_url %>">Sign Up</a>
+	<%= link_to "Log In", new_session_url, :method => :get %>
+	<% end %>
+
+	<% if flash[:notice]%>
+	<p><%= flash[:notice]%></p>
+	<% elsif flash[:error] %>
+	<p style="color: red;"><%= flash[:error]%></p>
+	<% end %>
+
+<%= yield %>
+
+</body>
+</html>

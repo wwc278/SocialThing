@@ -1,0 +1,4 @@
+<h1>Hello <%= @user.name %></h1>
+
+<%= link_to "Create a Friend Circle", new_user_friend_circle_membership_url(@user.id), :method => 'get'%>
+

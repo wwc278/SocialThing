@@ -1,0 +1,21 @@
+<% if method == :post %>
+	<% action_url, submit_value = user_friend_circle_memberships_url, "Create!"%>
+<% else %>
+	<% action_url, submit_value = friend_circle_membership_url(params[:id]), "Update!"%>
+<% end %>
+
+<form action='<%= action_url %>' method='post'>
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<input type="hidden" name="_method" value="<%= method %>">
+	<input type="hidden" name="friend_circle_membership[friend_ids]" value="">
+
+
+	<% @all_users.each do |u| %>
+		<% next if u == @user %>
+		<%= u.name%>
+			<input type='checkbox' name='friend_circle_membership[friend_ids][]' <%= "checked" if @friends.include?(u)%> value="<%= u.id %>">
+			<br>
+	<% end %>
+
+	<input type='submit' value="<%= submit_value %>">
+</form>
